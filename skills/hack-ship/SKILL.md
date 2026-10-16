@@ -49,7 +49,7 @@ Verify each item with evidence (a file, a command that ran, a URL that loaded), 
 | 5 | One-line value prop | It's at the top of the README | "<Product> helps <user> <do job> by <how>." |
 | 6 | Architecture sketch | In README | Take it from HACK.md Stack |
 | 7 | Track requirements verified | Each targeted track's rules checked | List gaps; fix or drop the track |
-| 8 | Pitch roles assigned | Names in HACK.md Pitch | Run `/hack-pitch` |
+| 8 | Pitch roles assigned | Names in HACK.md Pitch | Run `/hack-pitch`, then `/hack-showtime` for slides |
 | 9 | Backup video ready | A 60-90s recording of the journey exists | Screen-record the happy path now |
 
 For the backup video, any screen recorder works. The `brag` and `hyperframes` repos in the

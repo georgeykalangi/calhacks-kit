@@ -22,7 +22,7 @@ REQUIRED_FIELDS = {"repo", "category", "use_when", "setup_minutes", "needs_api_k
 OPTIONAL_FIELDS = {"install", "note"}
 CATEGORIES = {
     "agent-workflow", "design-ui", "app-framework", "backend", "agents-data",
-    "voice", "vision", "code-understanding", "demo-video", "discovery",
+    "voice", "vision", "code-understanding", "demo-video", "presentation", "discovery",
 }
 API_KEY_LEVELS = {"none", "free-tier", "llm", "paid"}
 DEMO_VALUES = {"low", "medium", "high"}

@@ -67,3 +67,4 @@ Long intro, click maze, jargon first, broken setup. Check the script for each an
 
 Write the one-liner and roles into the Pitch section of HACK.md, with a pointer to `PITCH.md`.
 Final reminders for the team: start on time, keep it honest, answer with curiosity, thank the judges.
+If the team wants slides for judging or Devpost, run `/hack-showtime` next.

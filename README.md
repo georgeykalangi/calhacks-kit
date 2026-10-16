@@ -1,6 +1,6 @@
 # calhacks-kit
 
-Five Claude Code skills that take a hackathon team from idea to judged demo, plus a curated,
+Six Claude Code skills that take a hackathon team from idea to judged demo, plus a curated,
 link-checked catalog of open-source repos worth using in a 36-hour build.
 
 > **Unofficial.** Made by a Cal Hacks mentor for Cal Hacks 13.0 hackers. Not affiliated with or
@@ -15,6 +15,12 @@ link-checked catalog of open-source repos worth using in a 36-hour build.
 | `/hack-check` | Every few hours | A score against the four judging criteria, scope-drift and honesty checks, rescue mode, feature freeze near the deadline |
 | `/hack-ship` | Final hours | Secret scan, the pre-judging checklist verified with evidence, README and Devpost drafts |
 | `/hack-pitch` | Before judging | A timed live-demo script, pitch roles, answers to likely judge questions |
+| `/hack-showtime` | After the pitch is written | A short, themed HTML slide deck built around the live demo, checked for overflow, exported to PDF for Devpost |
+
+![Slides from /hack-showtime for a fictional team, in three themes](examples/studysync/preview.png)
+
+*`/hack-showtime` output for StudySync, a fictional team from the [dry-run scenario](evals/studysync.md).
+Open [`examples/studysync/deck.html`](examples/studysync/deck.html) locally, press F for fullscreen and N for notes.*
 
 Every skill reads and writes **`HACK.md`** at the root of your project. It is the team's shared
 plan: commit it, and every teammate's Claude session works from the same scope, stack, and clock.
@@ -57,7 +63,8 @@ Hour 6   /hack-check   -> scores, drift, honesty
 Hour 18  /hack-check   -> harden phase begins
 Hour 24  /hack-check   -> feature freeze
 Hour 30  /hack-ship    -> secret scan, checklist, README, submission draft
-Hour 33  /hack-pitch   -> script, roles, Q&A, rehearse three times
+Hour 32  /hack-pitch   -> script, roles, Q&A
+Hour 33  /hack-showtime -> deck.html + deck.pdf, then rehearse three times
 ```
 
 ## The rules still apply

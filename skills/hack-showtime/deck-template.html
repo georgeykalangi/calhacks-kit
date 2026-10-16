@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PROJECT NAME | EVENT</title>
+<style>
+/* ===== THEME: replace this block with one theme from themes.md ===== */
+:root {
+  --bg: #DCE5D3;
+  --surface: #E9EFE3;
+  --ink: #111111;
+  --muted: #3B4A39;
+  --accent: #1F3D2B;
+  --accent-ink: #F4F7F0;
+  --line: #111111;
+  --band: #111111;
+  --band-ink: #F4F7F0;
+  --frame: 2px;
+  --font-display: "Avenir Next Condensed", "Helvetica Neue", "Arial Narrow", Impact, sans-serif;
+  --font-body: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --display-weight: 800;
+  --display-case: uppercase;
+}
+/* ===== END THEME ===== */
+
+/* ===== ENGINE: layout, navigation, print. Edit content below, not this. ===== */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; background: #000; overflow: hidden; }
+.deck { position: fixed; inset: 0; }
+.slide {
+  position: absolute; left: 50%; top: 50%; width: 1920px; height: 1080px;
+  transform: translate(-50%, -50%) scale(var(--scale, 1));
+  background: var(--bg); color: var(--ink); font-family: var(--font-body);
+  font-size: 34px; line-height: 1.4; padding: 110px 130px 160px;
+  display: none; flex-direction: column; overflow: hidden;
+}
+.slide.active { display: flex; }
+.slide::before {
+  content: ""; position: absolute; inset: 36px; border: var(--frame) solid var(--line);
+  pointer-events: none;
+}
+.slide > * { position: relative; }
+
+h1, h2, .display {
+  font-family: var(--font-display); font-weight: var(--display-weight);
+  text-transform: var(--display-case); line-height: 0.92; letter-spacing: -0.01em;
+}
+h1 { font-size: 200px; }
+h2 { font-size: 104px; margin-bottom: 40px; }
+.lede { font-size: 44px; line-height: 1.35; max-width: 1400px; color: var(--muted); }
+.kicker {
+  display: inline-block; align-self: flex-start; font-size: 28px; letter-spacing: 0.14em;
+  text-transform: uppercase; border: 2px solid var(--line); padding: 10px 22px; margin-bottom: 44px;
+}
+.small { font-size: 28px; color: var(--muted); }
+.accent { color: var(--accent); }
+.grow { flex: 1; }
+
+.slide-footer {
+  position: absolute; left: 130px; right: 130px; bottom: 64px;
+  display: flex; justify-content: space-between; font-size: 24px;
+  letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted);
+}
+
+/* Layout: title */
+.layout-title { justify-content: center; }
+.layout-title h1 { margin-bottom: 48px; }
+
+/* Layout: statement (problem, impact) */
+.layout-statement { justify-content: center; }
+.layout-statement .display { font-size: 140px; max-width: 1600px; margin-bottom: 48px; }
+
+/* Layout: split (text left, media right) */
+.layout-split { display: none; }
+.layout-split.active { display: grid; grid-template-columns: 5fr 7fr; gap: 90px; align-items: center; }
+.layout-split h2 { font-size: 96px; }
+
+/* Layout: media (full-width screenshot or video, the demo slide) */
+.layout-media { justify-content: center; gap: 36px; }
+.layout-media .media { flex: 1 1 0; min-height: 0; align-self: flex-start; max-width: 100%; }
+.layout-media .media img, .layout-media .media video { width: auto; height: 100%; max-width: 100%; }
+
+.media {
+  border: 3px solid var(--line); background: var(--surface); overflow: hidden;
+  display: flex; align-items: center; justify-content: center; min-height: 0;
+}
+.media img, .media video { width: 100%; height: 100%; object-fit: contain; display: block; }
+.media.placeholder { font-size: 30px; color: var(--muted); text-align: center; padding: 40px; }
+.live-tag {
+  display: inline-flex; align-items: center; gap: 16px; align-self: flex-start;
+  background: var(--accent); color: var(--accent-ink); font-size: 28px; letter-spacing: 0.14em;
+  text-transform: uppercase; padding: 12px 24px;
+}
+.live-tag::before { content: ""; width: 18px; height: 18px; border-radius: 50%; background: currentColor; }
+
+/* Layout: flow (architecture) */
+.flow { display: flex; align-items: stretch; gap: 0; margin-block: auto; }
+.node {
+  flex: 1; border: 3px solid var(--line); background: var(--surface); padding: 34px 30px;
+  display: flex; flex-direction: column; gap: 14px;
+}
+.node strong { font-family: var(--font-display); font-weight: var(--display-weight);
+  text-transform: var(--display-case); font-size: 52px; line-height: 1; }
+.node span { font-size: 26px; color: var(--muted); line-height: 1.35; }
+.node.key { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+.node.key span { color: var(--accent-ink); opacity: 0.85; }
+.arrow { width: 90px; display: flex; align-items: center; justify-content: center; font-size: 56px; }
+
+/* Layout: columns (what's new, the hard part, next steps) */
+.cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(0, 1fr)); gap: 0; margin-block: auto; }
+.col { padding: 0 44px; border-left: 2px solid var(--line); }
+.col:first-child { padding-left: 0; border-left: 0; }
+.col .num { font-size: 28px; letter-spacing: 0.12em; color: var(--muted); }
+.col h3 { font-family: var(--font-display); font-weight: var(--display-weight);
+  text-transform: var(--display-case); font-size: 60px; line-height: 0.95; margin: 14px 0 22px; }
+.col p { font-size: 30px; line-height: 1.4; }
+
+/* Layout: stats */
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(0, 1fr)); gap: 60px; margin-block: auto; }
+.stat .value { font-family: var(--font-display); font-weight: var(--display-weight); font-size: 190px; line-height: 0.9; color: var(--accent); }
+.stat .label { font-size: 30px; margin-top: 18px; color: var(--muted); }
+
+/* Quote band, like a pull quote */
+.band {
+  background: var(--band); color: var(--band-ink); padding: 40px 60px; margin-top: 40px;
+  font-size: 40px; line-height: 1.35; display: flex; gap: 36px; align-items: center;
+}
+.band::before { content: "\201C"; font-family: Georgia, serif; font-size: 120px; line-height: 1; height: 0.62em; overflow: hidden; }
+
+/* Layout: team */
+.team { display: grid; grid-template-columns: repeat(auto-fit, minmax(0, 1fr)); gap: 50px; margin-block: auto; }
+.member strong { display: block; font-family: var(--font-display); font-weight: var(--display-weight);
+  text-transform: var(--display-case); font-size: 80px; line-height: 1; margin-bottom: 12px; }
+.member span { font-size: 28px; color: var(--muted); }
+.disclosure { font-size: 26px; color: var(--muted); border-top: 2px solid var(--line); padding-top: 26px; }
+
+/* Speaker notes: hidden; press N to show */
+.notes { display: none; }
+.notes-panel {
+  position: fixed; left: 0; right: 0; bottom: 0; max-height: 40vh; overflow: auto;
+  background: rgba(10, 10, 10, 0.94); color: #f2f2f2; font: 18px/1.5 system-ui, sans-serif;
+  padding: 18px 28px; display: none; z-index: 10;
+}
+.notes-panel.open { display: block; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+
+@page { size: 1920px 1080px; margin: 0; }
+@media print {
+  html, body { background: none; overflow: visible; height: auto; }
+  .deck { position: static; }
+  .slide, .layout-split { display: flex !important; position: relative; left: 0; top: 0;
+    transform: none !important; break-after: page;
+    -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .layout-split { display: grid !important; }
+  .notes-panel, .sr-only { display: none !important; }
+}
+</style>
+</head>
+<body>
+<main class="deck" aria-roledescription="slide deck">
+
+  <!-- ===== SLIDES: fill these in. Remove slides you do not need. ===== -->
+
+  <section class="slide layout-title" aria-label="Title">
+    <span class="kicker">EVENT NAME</span>
+    <h1>PROJECT NAME</h1>
+    <p class="lede">One-liner: Product helps a specific user do one job by one mechanism.</p>
+    <aside class="notes">Say the one-liner, then go straight to the demo.</aside>
+  </section>
+
+  <section class="slide layout-media" aria-label="Demo">
+    <span class="live-tag">Live demo</span>
+    <div class="media placeholder">Screenshot of the moment of value: img/demo.png<br>(or a video: img/demo.mp4)</div>
+    <aside class="notes">Switch to the app. If it fails, this screenshot or video is the backup.</aside>
+  </section>
+
+  <section class="slide layout-statement" aria-label="Problem">
+    <span class="kicker">The problem</span>
+    <p class="display">A full-sentence claim about the user's pain.</p>
+    <p class="lede">The evidence: a number with its source, or a one-line story.</p>
+  </section>
+
+  <section class="slide" aria-label="How it works">
+    <span class="kicker">How it works</span>
+    <h2>Headline claim about the system</h2>
+    <div class="flow">
+      <div class="node"><strong>Input</strong><span>what the user gives</span></div>
+      <div class="arrow" aria-hidden="true">&rarr;</div>
+      <div class="node key"><strong>Hard part</strong><span>the engineering that matters</span></div>
+      <div class="arrow" aria-hidden="true">&rarr;</div>
+      <div class="node"><strong>Output</strong><span>the moment of value</span></div>
+    </div>
+  </section>
+
+  <section class="slide" aria-label="What is new">
+    <span class="kicker">What's new</span>
+    <h2>Headline claim</h2>
+    <div class="cols">
+      <div class="col"><div class="num">01</div><h3>Point</h3><p>One sentence of proof.</p></div>
+      <div class="col"><div class="num">02</div><h3>Point</h3><p>One sentence of proof.</p></div>
+      <div class="col"><div class="num">03</div><h3>Point</h3><p>One sentence of proof.</p></div>
+    </div>
+    <div class="band">A short line judges should remember.</div>
+  </section>
+
+  <section class="slide" aria-label="Team">
+    <span class="kicker">Built in 36 hours</span>
+    <h2>Team</h2>
+    <div class="team">
+      <div class="member"><strong>Name</strong><span>what they built</span></div>
+      <div class="member"><strong>Name</strong><span>what they built</span></div>
+    </div>
+    <p class="disclosure">Built at EVENT. Uses: open-source projects and AI tools. Seeded or mocked: list from HACK.md Honesty.</p>
+  </section>
+
+  <!-- ===== END SLIDES ===== -->
+
+</main>
+<div class="notes-panel" id="notes-panel" aria-live="polite"></div>
+<div class="sr-only" id="announcer" aria-live="polite"></div>
+<script>
+(() => {
+  const slides = [...document.querySelectorAll(".slide")];
+  const notesPanel = document.getElementById("notes-panel");
+  const announcer = document.getElementById("announcer");
+  const title = document.title.split("|")[0].trim();
+  const pad = (n) => String(n).padStart(2, "0");
+  let current = 0;
+
+  slides.forEach((slide, index) => {
+    const footer = document.createElement("div");
+    footer.className = "slide-footer";
+    footer.innerHTML = `<span></span><span>${pad(index + 1)} / ${pad(slides.length)}</span>`;
+    footer.firstChild.textContent = title;
+    slide.appendChild(footer);
+  });
+
+  function fit() {
+    const scale = Math.min(innerWidth / 1920, innerHeight / 1080);
+    document.documentElement.style.setProperty("--scale", scale);
+  }
+
+  function show(index) {
+    current = Math.max(0, Math.min(slides.length - 1, index));
+    slides.forEach((slide, i) => {
+      slide.classList.toggle("active", i === current);
+      slide.setAttribute("aria-hidden", String(i !== current));
+    });
+    const notes = slides[current].querySelector(".notes");
+    notesPanel.textContent = notes ? notes.textContent.trim() : "No notes for this slide.";
+    announcer.textContent = `Slide ${current + 1} of ${slides.length}: ${slides[current].getAttribute("aria-label") || ""}`;
+    history.replaceState(null, "", `#${current + 1}`);
+  }
+
+  addEventListener("keydown", (event) => {
+    const next = ["ArrowRight", "ArrowDown", "PageDown", " ", "Enter"];
+    const prev = ["ArrowLeft", "ArrowUp", "PageUp", "Backspace"];
+    if (next.includes(event.key)) { event.preventDefault(); show(current + 1); }
+    else if (prev.includes(event.key)) { event.preventDefault(); show(current - 1); }
+    else if (event.key === "Home") show(0);
+    else if (event.key === "End") show(slides.length - 1);
+    else if (event.key === "n" || event.key === "N") notesPanel.classList.toggle("open");
+    else if (event.key === "f" || event.key === "F") {
+      document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen();
+    }
+  });
+
+  document.querySelector(".deck").addEventListener("click", (event) => {
+    if (event.target.closest("a, video, button")) return;
+    show(event.clientX > innerWidth / 2 ? current + 1 : current - 1);
+  });
+
+  let touchStartX = null;
+  addEventListener("touchstart", (event) => { touchStartX = event.touches[0].clientX; });
+  addEventListener("touchend", (event) => {
+    if (touchStartX === null) return;
+    const delta = event.changedTouches[0].clientX - touchStartX;
+    if (Math.abs(delta) > 50) show(delta < 0 ? current + 1 : current - 1);
+    touchStartX = null;
+  });
+
+  // ?check marks slides whose content runs into the footer or past the right edge.
+  const SAFE_BOTTOM = 1080 - 140;
+  const SAFE_RIGHT = 1920 - 130;
+  function overflows(slide) {
+    slide.classList.add("active");
+    const tooBig = [...slide.children]
+      .filter((el) => !el.matches(".slide-footer, .notes"))
+      .some((el) => el.offsetTop + el.offsetHeight > SAFE_BOTTOM || el.offsetLeft + el.offsetWidth > SAFE_RIGHT + 1);
+    slide.classList.remove("active");
+    return tooBig;
+  }
+  if (new URLSearchParams(location.search).has("check")) {
+    slides.forEach((slide) => {
+      if (!overflows(slide)) return;
+      slide.dataset.overflow = "true";
+      slide.style.outline = "12px solid #E03131";
+      slide.style.outlineOffset = "-12px";
+    });
+  }
+
+  addEventListener("resize", fit);
+  fit();
+  show((parseInt(location.hash.slice(1), 10) || 1) - 1);
+})();
+</script>
+</body>
+</html>

@@ -50,3 +50,14 @@ tutor, syncs Google Calendar." First answer to "who": "college students".
 - Expect: a 3-minute script with the demo inside the first 20 seconds, plus a 30-second
   version for judges who arrive late, written to `PITCH.md`.
 - Expect: the hardcoded parts disclosed in one plain sentence.
+
+## /hack-showtime
+Provide one screenshot of the match screen in `showtime/img/`.
+
+- Expect: 7 slides in pitch order, demo second, team slide with the disclosure line.
+- Expect: a theme built from the product's colors (first choice), not a random preset.
+- Expect: no mockups of screens that do not exist; the real screenshot on the demo slide.
+- Expect: `deck.html?check` reports no overflow in the chosen theme. The original slide 5 copy
+  ("Matched on confusion, not calendars" plus longer column text) overflows in every theme and
+  must be cut, not shrunk.
+- Expect: `deck.pdf` has exactly 7 pages at 16:9.

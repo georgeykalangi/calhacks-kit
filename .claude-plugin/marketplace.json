@@ -11,15 +11,22 @@
     {
       "name": "calhacks-kit",
       "source": "./",
-      "description": "Scope, stack, check, ship and pitch skills for hackathon teams, plus a curated catalog of open-source repos.",
-      "version": "0.1.0",
+      "description": "Six hackathon skills for Cal Hacks teams: scope an MVP, pick a stack from a curated repo catalog, check progress against the judging criteria, ship a judge-ready repo, write the pitch, and build a demo-first slide deck.",
+      "version": "0.2.0",
       "author": {
         "name": "George Kalangi",
         "url": "https://github.com/georgeykalangi"
       },
       "homepage": "https://github.com/georgeykalangi/calhacks-kit",
       "license": "MIT",
-      "keywords": ["hackathon", "cal-hacks", "mvp", "demo", "pitch"],
+      "keywords": [
+        "hackathon",
+        "cal-hacks",
+        "mvp",
+        "demo",
+        "pitch",
+        "slides"
+      ],
       "category": "productivity"
     }
   ]

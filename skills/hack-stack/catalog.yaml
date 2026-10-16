@@ -3,7 +3,7 @@
 # Fields
 #   repo           owner/name of the ORIGINAL repo (never a fork)
 #   category       agent-workflow | design-ui | app-framework | backend | agents-data |
-#                  voice | vision | code-understanding | demo-video | discovery
+#                  voice | vision | code-understanding | demo-video | presentation | discovery
 #   use_when       one line: the situation where this is the right pick
 #   setup_minutes  rough time to "hello world" for a team that knows the language (estimate)
 #   needs_api_key  none | free-tier | llm | paid   (llm = a key for an LLM provider of your choice)
@@ -273,6 +273,16 @@ entries:
     license: Apache-2.0
     demo_value: high
     install: claude plugin marketplace add heygen-com/hyperframes
+
+  # Presentation
+  - repo: zarazhangrui/frontend-slides
+    category: presentation
+    use_when: You want an animated, more elaborate HTML deck than /hack-showtime builds.
+    setup_minutes: 10
+    needs_api_key: none
+    license: MIT
+    demo_value: high
+    install: /plugin marketplace add https://github.com/zarazhangrui/frontend-slides
 
   # Discovery: when nothing above fits
   - repo: Shubhamsaboo/awesome-llm-apps
