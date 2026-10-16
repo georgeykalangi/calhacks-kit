@@ -19,13 +19,19 @@ Ask the team to paste `HACK.md`, their recent commit messages, and what currentl
 - If there is a run or test command, run it. Evidence beats the team's description.
 
 ### 2. Pick the phase from the clock
+Get the current time with `date` and compare it with the deadline in `HACK.md`.
+
 | Hours left | Phase | Behavior |
 |------------|-------|----------|
 | more than 12 | Build | Push to finish the journey end to end, even if rough. |
 | 6 to 12 | Harden | No new features. Fix the happy path, seed data, deploy. |
 | under 6 | Freeze | Refuse new features. Only demo-critical fixes, README, video, pitch. |
 
-In Freeze, if the team asks for a feature, say no and name what to do instead.
+Finishing the MVP journey is never a "new feature". If the journey does not work end to end by
+Harden or Freeze, it is the only priority: go straight to rescue mode (step 6) and shrink it
+until it runs. A "new feature" is anything outside the journey or on the cut list.
+
+In Harden or Freeze, if the team asks for a new feature, say no and name what to do instead.
 
 ### 3. Score the four criteria
 Score each 1-5 with one line of evidence and one concrete action:
@@ -38,6 +44,9 @@ Score each 1-5 with one line of evidence and one concrete action:
 | Technical Complexity | | | |
 
 Name the weakest criterion and the single highest-leverage fix for it.
+
+Also check each targeted track in `HACK.md`. If the build does not yet meet a track's
+requirement (for example, the required API is never actually called), say so explicitly.
 
 ### 4. Check scope drift
 Compare recent work against the MVP journey. If time went into items on the cut list, or into

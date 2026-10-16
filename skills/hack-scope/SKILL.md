@@ -24,7 +24,9 @@ If you are running as a pasted prompt in a chat, do every step below, then outpu
 
 ### 2. Start the clock
 Ask for the submission deadline, the judging time, team size, and each person's strengths.
-Compute hours remaining and propose a budget:
+Get the current time with `date`. Compute hours remaining, subtract sleep (plan shifts so at
+least one person is always building, and nobody demos on zero sleep), and propose a budget
+as clock times, not just percentages:
 
 | Phase | Share | Goal |
 |-------|-------|------|
@@ -34,6 +36,12 @@ Compute hours remaining and propose a budget:
 | Buffer | 10% | something will break |
 
 If fewer than 12 hours remain, say so plainly and shrink the journey to 2-3 steps.
+
+### No idea yet, or too many?
+If the team has no idea, ask for: problems each person hit this month, their strengths, and the
+sponsor tracks that interest them. Propose 3 ideas that sit where those overlap. If the team
+has several ideas, score each 1-5 on the four judging criteria plus "can we build it in the
+time left", pick the highest total, and move on within 30 minutes. Then continue below.
 
 ### 3. Ask the five questions
 Ask one at a time. Push back on vague answers.

@@ -15,13 +15,19 @@ and the secret-scan commands to run themselves.
 ## Steps
 
 ### 1. Secret scan first
-Run this before anything else, and always before the repo is made public:
+Run this before anything else, and always before the repo is made public. `P` is the
+`secret-patterns.txt` file next to this skill (Anthropic, OpenAI, AWS, GitHub, Google, Slack,
+private keys, and generic `*_KEY=` / `*_SECRET=` / `*_TOKEN=` assignments):
 
 ```bash
-git ls-files | grep -E '(^|/)\.env$'
-git grep -nE 'sk-ant-[A-Za-z0-9_-]{20,}|sk-[A-Za-z0-9]{32,}|AKIA[0-9A-Z]{16}|ghp_[A-Za-z0-9]{36}|AIza[0-9A-Za-z_-]{35}|xox[abprs]-[A-Za-z0-9-]{10,}'
-git log -p --all | grep -nE 'sk-ant-[A-Za-z0-9_-]{20,}|AKIA[0-9A-Z]{16}|ghp_[A-Za-z0-9]{36}|AIza[0-9A-Za-z_-]{35}' | head
+P=<absolute path to secret-patterns.txt next to this skill>
+git ls-files | grep -E '(^|/)\.env$'           # tracked .env files
+git grep -nE -f "$P"                            # secrets in current files
+git log -p --all | grep -nE -f "$P" | head -20  # secrets anywhere in history
 ```
+
+No output from a command means it found nothing. Without the file (pasted prompt), fetch it:
+`curl -sO https://raw.githubusercontent.com/georgeykalangi/calhacks-kit/main/skills/hack-ship/secret-patterns.txt`
 
 - A tracked `.env` file: remove it from git, add it to `.gitignore`, and keep `.env.example`.
 - A key in the current files: move it to `.env`.

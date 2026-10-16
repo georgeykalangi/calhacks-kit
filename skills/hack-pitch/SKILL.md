@@ -30,6 +30,12 @@ Show the working product as early as possible: the demo starts within the first 
 Scale proportionally for longer slots. Write the script as spoken lines, not bullet points.
 Disclose anything listed under Honesty in HACK.md, in one plain sentence during the demo.
 
+At expo tables judges arrive mid-pitch and leave early. Also write a **30-second version**: the
+one-liner, then straight to the moment of value on screen. Use it when a judge walks up late.
+
+Write the full script, the 30-second version, and the Q&A answers to `PITCH.md` so the team can
+read from it while rehearsing.
+
 ### 3. Assign roles
 - **Driver**: hands on the keyboard, follows the script, never improvises clicks.
 - **Narrator**: tells the story while the driver demos.
@@ -59,5 +65,5 @@ Long intro, click maze, jargon first, broken setup. Check the script for each an
 - Demo machine: notifications off, extra tabs closed, zoom to 125%, already logged in with the
   seeded account, sample data loaded, backup video open in a tab, laptop charged.
 
-Write the one-liner, roles, and script summary into the Pitch section of HACK.md.
+Write the one-liner and roles into the Pitch section of HACK.md, with a pointer to `PITCH.md`.
 Final reminders for the team: start on time, keep it honest, answer with curiosity, thank the judges.

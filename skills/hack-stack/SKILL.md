@@ -36,10 +36,12 @@ Rules:
 For each pick give: what it does for this MVP, setup minutes, key needed, and the install command
 only if you are sure of it. Otherwise point to the repo README.
 
-### 4. Name the riskiest integration
-Pick the one integration most likely to fail (an API they have never used, real-time audio,
-hardware, auth). Tell the team to spike it for 30 minutes before building around it.
-If the spike fails, swap it now, not at hour 30.
+### 4. Name the riskiest part
+Pick the one thing most likely to sink the demo. It can be an integration (an API they have
+never used, real-time audio, hardware, auth) or an assumption about results (will the model's
+output be consistent enough to match, rank, or classify on?). Tell the team to spike it for
+30 minutes with real inputs before building around it. If the spike fails, change the approach
+now, not at hour 30.
 
 ### 5. Set up secrets safely
 Before any key is used, make sure the repo has:

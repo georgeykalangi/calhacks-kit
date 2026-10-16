@@ -128,6 +128,24 @@ entries:
     demo_value: low
 
   # Agents and data
+  - repo: anthropics/anthropic-sdk-python
+    category: agents-data
+    use_when: Your Python backend calls Claude (required for most "best use of Claude" tracks).
+    setup_minutes: 10
+    needs_api_key: llm
+    license: MIT
+    demo_value: medium
+    install: pip install anthropic
+
+  - repo: anthropics/anthropic-sdk-typescript
+    category: agents-data
+    use_when: Your TypeScript or Node backend calls Claude.
+    setup_minutes: 10
+    needs_api_key: llm
+    license: MIT
+    demo_value: medium
+    install: npm install @anthropic-ai/sdk
+
   - repo: anthropics/claude-quickstarts
     category: agents-data
     use_when: You want a working Claude app (support agent, computer use, financial analyst) to learn from.
