@@ -1,0 +1,282 @@
+# calhacks-kit catalog
+#
+# Fields
+#   repo           owner/name of the ORIGINAL repo (never a fork)
+#   category       agent-workflow | design-ui | app-framework | backend | agents-data |
+#                  voice | vision | code-understanding | demo-video | discovery
+#   use_when       one line: the situation where this is the right pick
+#   setup_minutes  rough time to "hello world" for a team that knows the language (estimate)
+#   needs_api_key  none | free-tier | llm | paid   (llm = a key for an LLM provider of your choice)
+#   license        SPDX id as reported by GitHub, or "see repo"
+#   demo_value     high = judges see it; medium = shapes the demo; low = behind the scenes
+#   install        optional; only commands copied from the repo's own README
+#   note           optional caveat
+#
+# Links are checked weekly by .github/workflows/catalog-check.yml.
+
+version: 1
+entries:
+  # Agent workflow: how your coding assistant works
+  - repo: obra/superpowers
+    category: agent-workflow
+    use_when: You want Claude Code to plan, write tests first, and review its own work.
+    setup_minutes: 5
+    needs_api_key: none
+    license: MIT
+    demo_value: low
+    note: The full process is heavy under time pressure. Use planning and debugging skills selectively.
+
+  - repo: anthropics/skills
+    category: agent-workflow
+    use_when: You need official Anthropic skills for frontend design, documents, or building MCP servers.
+    setup_minutes: 5
+    needs_api_key: none
+    license: see repo
+    demo_value: medium
+
+  - repo: georgeykalangi/claude-code-rules
+    category: agent-workflow
+    use_when: You want consistent code quality, testing, and security standards in every Claude session.
+    setup_minutes: 5
+    needs_api_key: none
+    license: see repo
+    demo_value: low
+
+  - repo: agentskills/agentskills
+    category: agent-workflow
+    use_when: You want to write your own reusable skill and share it with other teams.
+    setup_minutes: 10
+    needs_api_key: none
+    license: Apache-2.0
+    demo_value: low
+
+  # Design and UI
+  - repo: nextlevelbuilder/ui-ux-pro-max-skill
+    category: design-ui
+    use_when: Your UI looks like a default template and you want it to look intentional fast.
+    setup_minutes: 5
+    needs_api_key: none
+    license: MIT
+    demo_value: high
+    install: /plugin marketplace add nextlevelbuilder/ui-ux-pro-max-skill
+
+  - repo: shadcn-ui/ui
+    category: design-ui
+    use_when: You are building a React or Next.js frontend and want accessible components you own.
+    setup_minutes: 15
+    needs_api_key: none
+    license: MIT
+    demo_value: high
+
+  - repo: cathrynlavery/diagram-design
+    category: design-ui
+    use_when: You need a clean architecture diagram for the README, slides, or the judge Q&A.
+    setup_minutes: 5
+    needs_api_key: none
+    license: MIT
+    demo_value: medium
+    install: npx skills add cathrynlavery/diagram-design
+
+  - repo: vercel-labs/json-render
+    category: design-ui
+    use_when: Your app has an LLM generate UI (cards, forms, dashboards) from structured output.
+    setup_minutes: 30
+    needs_api_key: llm
+    license: Apache-2.0
+    demo_value: medium
+
+  # App frameworks: get something on screen
+  - repo: streamlit/streamlit
+    category: app-framework
+    use_when: Your team is Python-first and the demo is a data or ML app.
+    setup_minutes: 10
+    needs_api_key: none
+    license: Apache-2.0
+    demo_value: medium
+
+  - repo: gradio-app/gradio
+    category: app-framework
+    use_when: You are demoing a model and want a shareable web UI in a few lines of Python.
+    setup_minutes: 10
+    needs_api_key: none
+    license: Apache-2.0
+    demo_value: medium
+
+  - repo: expo/expo
+    category: app-framework
+    use_when: The demo should run on a phone. Judges can try it with Expo Go.
+    setup_minutes: 30
+    needs_api_key: none
+    license: MIT
+    demo_value: high
+
+  - repo: vercel/ai
+    category: app-framework
+    use_when: You are building in TypeScript and need streaming chat, tool calling, or structured output.
+    setup_minutes: 20
+    needs_api_key: llm
+    license: see repo
+    demo_value: medium
+
+  # Backend
+  - repo: supabase/supabase
+    category: backend
+    use_when: You need a database, auth, and file storage without running servers.
+    setup_minutes: 20
+    needs_api_key: free-tier
+    license: Apache-2.0
+    demo_value: low
+
+  # Agents and data
+  - repo: anthropics/claude-quickstarts
+    category: agents-data
+    use_when: You want a working Claude app (support agent, computer use, financial analyst) to learn from.
+    setup_minutes: 15
+    needs_api_key: llm
+    license: MIT
+    demo_value: medium
+    note: Learn the patterns, then build your own. Disclose any template code you keep.
+
+  - repo: modelcontextprotocol/servers
+    category: agents-data
+    use_when: Your agent needs tools (filesystem, git, fetch, memory) through MCP.
+    setup_minutes: 10
+    needs_api_key: none
+    license: see repo
+    demo_value: medium
+
+  - repo: browser-use/browser-use
+    category: agents-data
+    use_when: Your agent has to operate real websites (fill forms, click through flows).
+    setup_minutes: 20
+    needs_api_key: llm
+    license: MIT
+    demo_value: high
+    note: Live web automation can be flaky on event wifi. Record a backup video.
+
+  - repo: firecrawl/firecrawl
+    category: agents-data
+    use_when: You need clean, LLM-ready text from websites.
+    setup_minutes: 10
+    needs_api_key: free-tier
+    license: AGPL-3.0
+    demo_value: medium
+    note: The hosted API is quickest. Self-hosting takes much longer. AGPL if you self-host and commercialize.
+
+  - repo: D4Vinci/Scrapling
+    category: agents-data
+    use_when: You need to scrape sites in Python without a hosted service.
+    setup_minutes: 10
+    needs_api_key: none
+    license: BSD-3-Clause
+    demo_value: low
+    install: pip install scrapling
+
+  - repo: VectifyAI/PageIndex
+    category: agents-data
+    use_when: You need question answering over long documents (reports, filings, manuals).
+    setup_minutes: 20
+    needs_api_key: llm
+    license: MIT
+    demo_value: medium
+    install: pip install -U pageindex
+
+  # Voice
+  - repo: pipecat-ai/pipecat
+    category: voice
+    use_when: You are building a real-time voice or multimodal agent in Python.
+    setup_minutes: 45
+    needs_api_key: llm
+    license: BSD-2-Clause
+    demo_value: high
+    note: Also needs speech-to-text and text-to-speech provider keys. Test the mic in the venue early.
+
+  - repo: livekit/agents
+    category: voice
+    use_when: You need real-time voice or video agents with rooms and telephony.
+    setup_minutes: 45
+    needs_api_key: free-tier
+    license: Apache-2.0
+    demo_value: high
+    note: Also needs LLM and speech provider keys.
+
+  # Vision
+  - repo: google-ai-edge/mediapipe
+    category: vision
+    use_when: You need real-time hand, face, or pose tracking on a laptop or phone without a GPU.
+    setup_minutes: 20
+    needs_api_key: none
+    license: Apache-2.0
+    demo_value: high
+
+  - repo: ultralytics/ultralytics
+    category: vision
+    use_when: You need object detection or segmentation from a camera or images.
+    setup_minutes: 20
+    needs_api_key: none
+    license: AGPL-3.0
+    demo_value: high
+    note: AGPL. Fine for a hackathon; check the license before commercializing.
+
+  # Understanding and checking code
+  - repo: Egonex-AI/Understand-Anything
+    category: code-understanding
+    use_when: A teammate needs to understand AI-generated code before judges ask about it.
+    setup_minutes: 10
+    needs_api_key: none
+    license: MIT
+    demo_value: low
+    install: /plugin marketplace add Egonex-AI/Understand-Anything
+
+  - repo: cloudflare/security-audit-skill
+    category: code-understanding
+    use_when: You want a security pass before making the repo public.
+    setup_minutes: 10
+    needs_api_key: none
+    license: MIT
+    demo_value: low
+
+  # Demo video
+  - repo: latent-spaces/brag
+    category: demo-video
+    use_when: You want a short launch or backup video generated from your project.
+    setup_minutes: 15
+    needs_api_key: none
+    license: MIT
+    demo_value: high
+    install: /plugin marketplace add latent-spaces/brag
+    note: Uses the hyperframes CLI. A plain screen recording is an acceptable backup.
+
+  - repo: heygen-com/hyperframes
+    category: demo-video
+    use_when: You want to build a demo video from HTML with your coding agent.
+    setup_minutes: 15
+    needs_api_key: none
+    license: Apache-2.0
+    demo_value: high
+    install: claude plugin marketplace add heygen-com/hyperframes
+
+  # Discovery: when nothing above fits
+  - repo: Shubhamsaboo/awesome-llm-apps
+    category: discovery
+    use_when: You want examples of LLM apps, agents, and RAG to borrow patterns from.
+    setup_minutes: 0
+    needs_api_key: none
+    license: Apache-2.0
+    demo_value: low
+
+  - repo: VoltAgent/awesome-agent-skills
+    category: discovery
+    use_when: You need a skill for a niche task not covered here.
+    setup_minutes: 0
+    needs_api_key: none
+    license: MIT
+    demo_value: low
+
+  - repo: ai-boost/awesome-harness-engineering
+    category: discovery
+    use_when: You are building an agent and need patterns for tools, memory, evals, or orchestration.
+    setup_minutes: 0
+    needs_api_key: none
+    license: see repo
+    demo_value: low

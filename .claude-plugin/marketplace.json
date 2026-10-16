@@ -1,0 +1,26 @@
+{
+  "name": "calhacks-kit",
+  "owner": {
+    "name": "George Kalangi",
+    "url": "https://github.com/georgeykalangi"
+  },
+  "metadata": {
+    "description": "Unofficial hackathon toolkit for Cal Hacks teams."
+  },
+  "plugins": [
+    {
+      "name": "calhacks-kit",
+      "source": "./",
+      "description": "Scope, stack, check, ship and pitch skills for hackathon teams, plus a curated catalog of open-source repos.",
+      "version": "0.1.0",
+      "author": {
+        "name": "George Kalangi",
+        "url": "https://github.com/georgeykalangi"
+      },
+      "homepage": "https://github.com/georgeykalangi/calhacks-kit",
+      "license": "MIT",
+      "keywords": ["hackathon", "cal-hacks", "mvp", "demo", "pitch"],
+      "category": "productivity"
+    }
+  ]
+}

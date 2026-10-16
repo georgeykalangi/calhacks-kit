@@ -1,0 +1,30 @@
+name: catalog-check
+
+on:
+  pull_request:
+    paths:
+      - "skills/hack-stack/catalog.yaml"
+      - "scripts/check_catalog.py"
+  push:
+    branches: [main]
+    paths:
+      - "skills/hack-stack/catalog.yaml"
+  schedule:
+    - cron: "0 15 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r scripts/requirements.txt
+      - run: python scripts/check_catalog.py
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
