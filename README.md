@@ -27,32 +27,121 @@ plan: commit it, and every teammate's Claude session works from the same scope, 
 
 ## Install
 
-**Claude Code (plugin)**
+> **Install before you arrive.** Event wifi is slow with 2,000 people on it. Every teammate
+> installs on their own laptop; the skills are plain Markdown, so there is nothing to build.
+
+Pick the option that matches the tool you use:
+
+| You use | Option | Command names |
+|---------|--------|---------------|
+| Claude Code | [A. Plugin](#a-claude-code-plugin-recommended) (recommended) | `/calhacks-kit:hack-scope` ... |
+| Claude Code, want short names | [B. Copy the skills](#b-claude-code-short-names) | `/hack-scope` ... |
+| Cursor, Codex, Windsurf, or another agent | [C. `npx skills`](#c-cursor-codex-and-other-agents) | depends on the agent |
+| A chat window (free claude.ai, any LLM) | [D. Paste a prompt](#d-any-chat-no-install) | none |
+
+### A. Claude Code plugin (recommended)
+
+In Claude Code, send these as **two separate messages**:
 
 ```
 /plugin marketplace add georgeykalangi/calhacks-kit
+```
+```
 /plugin install calhacks-kit@calhacks-kit
 ```
 
-Plugin skills are namespaced, so they appear as `/calhacks-kit:hack-scope` and so on.
-Claude also picks them up automatically when you describe what you need.
+Or run the same thing from your terminal:
 
-**Claude Code (plain skills, short names)**
+```bash
+claude plugin marketplace add georgeykalangi/calhacks-kit
+claude plugin install calhacks-kit@calhacks-kit
+```
+
+Start a new Claude Code session, then check it worked:
+
+```bash
+claude plugin details calhacks-kit@calhacks-kit   # should list "Skills (6)"
+```
+
+Plugin skills are namespaced: type `/calhacks-kit:hack-scope`, `/calhacks-kit:hack-stack`, and so on.
+You can also just describe what you need ("help us scope our idea") and Claude picks the right skill.
+The kit adds about 500 tokens to each session until a skill runs.
+
+### B. Claude Code, short names
 
 ```bash
 git clone https://github.com/georgeykalangi/calhacks-kit
+mkdir -p ~/.claude/skills
 cp -r calhacks-kit/skills/* ~/.claude/skills/
 ```
 
-**Cursor, Codex, and other agents** that support Agent Skills:
+Start a new session and type `/hack-scope`. To install for one project only, copy into
+`<your-project>/.claude/skills/` instead.
+
+### C. Cursor, Codex, and other agents
+
+Needs Node.js. From your project folder:
 
 ```bash
 npx skills add georgeykalangi/calhacks-kit
 ```
 
-**No coding agent? Use any chat (including free claude.ai).** Open a skill's `SKILL.md`, copy
-everything below the `---` header, paste it into the chat, then describe your project. Each skill
-has a "No file access?" section that tells the assistant how to work without your files.
+It asks which skills and which agents to install for. To skip the questions:
+
+```bash
+npx skills add georgeykalangi/calhacks-kit --skill '*' -a claude-code cursor codex -y
+```
+
+This writes the skills to `.agents/skills/` (read by Cursor and Codex) and links them into
+`.claude/skills/`. Add `-g` to install for your user instead of this project.
+
+### D. Any chat, no install
+
+Each skill works as a pasted prompt. This copies one skill to your clipboard:
+
+```bash
+npx skills use georgeykalangi/calhacks-kit@hack-scope | pbcopy    # macOS
+npx skills use georgeykalangi/calhacks-kit@hack-scope | clip      # Windows
+npx skills use georgeykalangi/calhacks-kit@hack-scope | xclip -selection clipboard   # Linux
+```
+
+Paste it into the chat, then describe your project. Without Node.js, open the skill's
+[`SKILL.md`](skills/hack-scope/SKILL.md) on GitHub, click **Raw**, and copy everything.
+A chat cannot read your files, so the skill asks you to paste `HACK.md` in and gives you the
+updated version to save back to your repo.
+
+## Quick start
+
+```bash
+cd your-project
+claude
+```
+```
+/calhacks-kit:hack-scope We are 3 people, deadline is Sunday 2pm. Idea: <your idea>
+```
+
+It asks the five problem questions, cuts the idea to one journey, and writes `HACK.md`.
+**Commit `HACK.md` and push it.** Teammates pull it, and their sessions now share the same plan.
+Then follow the timeline below.
+
+## Update and uninstall
+
+| | Plugin (A) | Copied skills (B) | `npx skills` (C) |
+|---|---|---|---|
+| Update | `claude plugin marketplace update calhacks-kit` then `claude plugin update calhacks-kit@calhacks-kit` | `git pull` in the clone, copy again | `npx skills update` |
+| Uninstall | `claude plugin uninstall calhacks-kit@calhacks-kit` | delete `~/.claude/skills/hack-*` | `npx skills remove` |
+
+## Troubleshooting
+
+- **`/hack-scope` isn't found after installing the plugin.** Plugin skills have a prefix:
+  use `/calhacks-kit:hack-scope`, or install with option B for short names.
+- **The skills don't show up at all.** Start a new session. Check with `claude plugin list`
+  (plugin) or `ls ~/.claude/skills` (copied).
+- **`npx skills add` asks a lot of questions.** Use the `-y` command in option C.
+- **GitHub is unreachable on event wifi.** Get the folder from a teammate (AirDrop or USB) and use
+  option B: the skills are plain files and work offline.
+- **Before you trust any skill**, read it. They are short Markdown files in [`skills/`](skills/)
+  and run with your agent's permissions.
 
 ## A 36-hour run
 
