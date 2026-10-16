@@ -12,7 +12,7 @@
       "name": "calhacks-kit",
       "source": "./",
       "description": "Six hackathon skills for Cal Hacks teams: scope an MVP, pick a stack from a curated repo catalog, check progress against the judging criteria, ship a judge-ready repo, write the pitch, and build a demo-first slide deck.",
-      "version": "0.2.0",
+      "version": "0.2.1",
       "author": {
         "name": "George Kalangi",
         "url": "https://github.com/georgeykalangi"

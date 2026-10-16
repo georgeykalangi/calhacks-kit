@@ -65,6 +65,10 @@ Fill the standard Devpost sections from HACK.md: Inspiration, What it does, How 
 Challenges we ran into, Accomplishments, What we learned, What's next. Disclose open-source
 projects and AI coding tools used. Keep claims to what the demo actually shows.
 
+Before the submission deadline (often earlier than the end of hacking), confirm on Devpost: every
+teammate is added, a project image is uploaded, the GitHub repo link works in a logged-out
+browser, and every targeted track is selected with its extra steps done (social post, email form).
+
 ### 5. Report
 Show the checklist with `[x]`/`[ ]`, the secret-scan result, and the top three items to fix in
 priority order. Add a Status log line to HACK.md.
